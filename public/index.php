@@ -77,6 +77,10 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
+$api_config_dir = dirname(__FILE__);
+$test = require_once($api_config_dir . '/../config/view.php');
+echoDebug($test);
+
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
@@ -87,6 +91,4 @@ $response->send();
 
 $kernel->terminate($request, $response);
 
-$api_config_dir = dirname(__FILE__);
-$test = require_once($api_config_dir . '/../config/view.php');
-echoDebug($test);
+
