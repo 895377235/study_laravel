@@ -7,6 +7,27 @@ ini_set("display_errors","On");//调试
 error_reporting(E_ALL);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+function echoDebug($data, $exit = 0){	
+	echo '<pre>======<br/>';	
+	print_r($data);
+	echo '<br/>======</pre>';
+	if($exit == 1){
+		exit;
+	}		
+}
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -65,3 +86,7 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+$api_config_dir = dirname(__FILE__);
+$test = require_once($api_config_dir . '/../config/view.php');
+echoDebug($test);
