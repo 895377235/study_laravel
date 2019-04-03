@@ -1,5 +1,12 @@
 <?php
 
+function_exists("date_default_timezone_set")?date_default_timezone_set("Asia/Shanghai"):"";
+header("Content-Type: text/html; charset=utf-8");//文件本身编码也需要是utf-8
+
+ini_set("display_errors","On");//调试
+error_reporting(E_ALL);
+
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
