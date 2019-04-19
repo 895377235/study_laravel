@@ -1,22 +1,9 @@
 <?php
-
 function_exists("date_default_timezone_set")?date_default_timezone_set("Asia/Shanghai"):"";
 header("Content-Type: text/html; charset=utf-8");//文件本身编码也需要是utf-8
 
 ini_set("display_errors","On");//调试
 error_reporting(E_ALL);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function echoDebug($data, $exit = 0){	
@@ -29,10 +16,8 @@ function echoDebug($data, $exit = 0){
 }
 
 /**
- * Laravel - A PHP Framework For Web Artisans
  *
  * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
  */
 
 define('LARAVEL_START', microtime(true));
@@ -45,11 +30,14 @@ define('LARAVEL_START', microtime(true));
 | Composer provides a convenient, automatically generated class loader for
 | our application. We just need to utilize it! We'll simply require it
 | into the script here so that we don't have to worry about manual
-| loading any of our classes later on. It feels great to relax.
+| loading any of our classes later on. 
 |
 */
 
 require __DIR__.'/../vendor/autoload.php';
+
+echoDebug(__DIR__);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -78,8 +66,9 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 */
 
 $api_config_dir = dirname(__FILE__);
-$test = require_once($api_config_dir . '/../config/view.php');
-echoDebug($test);
+
+//$test = require_once($api_config_dir . '/../config/view.php');
+//echoDebug($test);
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 

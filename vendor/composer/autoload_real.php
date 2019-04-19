@@ -13,11 +13,14 @@ class ComposerAutoloaderInit798836f8389437fb3cf634291b4a1b47
         }
     }
 
-    public static function getLoader()
+    public static function getLoader()//静态方法可以不实例化而直接访问
     {
         if (null !== self::$loader) {
             return self::$loader;
         }
+		
+		
+		
 
         spl_autoload_register(array('ComposerAutoloaderInit798836f8389437fb3cf634291b4a1b47', 'loadClassLoader'), true, true);
         self::$loader = $loader = new \Composer\Autoload\ClassLoader();
