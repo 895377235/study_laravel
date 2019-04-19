@@ -4,9 +4,23 @@ namespace Illuminate\Container;
 
 use Closure;
 use Exception;
-use ArrayAccess;
+
+
+/*
+需要实现四个方法：
+
+abstract public boolean offsetExists ( mixed $offset )
+abstract public mixed offsetGet ( mixed $offset )
+abstract public void offsetSet ( mixed $offset , mixed $value )
+abstract public void offsetUnset ( mixed $offset )
+*/
+
+use ArrayAccess;   //提供访问对象数组
+
+
 use LogicException;
 use ReflectionClass;
+
 use ReflectionParameter;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -354,6 +368,7 @@ class Container implements ArrayAccess, ContainerContract
      */
     public function singleton($abstract, $concrete = null)
     {
+		//singleton 意为单例,把 bind 的第三个参数设置为共享状态
         $this->bind($abstract, $concrete, true);
     }
 
@@ -1217,6 +1232,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $key
      * @return bool
      */
+	 //当外部使用 isset() 函数时触发此方法
     public function offsetExists($key)
     {
         return $this->bound($key);
@@ -1228,6 +1244,8 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $key
      * @return mixed
      */
+	 
+	 //当外部尝试获取 $key 的时候，如 echo ,print_r,var_dump，赋值等。就会触发此方法
     public function offsetGet($key)
     {
         return $this->make($key);
@@ -1240,6 +1258,8 @@ class Container implements ArrayAccess, ContainerContract
      * @param  mixed   $value
      * @return void
      */
+	 
+	 //此方法内部先进行一个 instanceof 判断 如果 value 参数不是一个闭包，则将・$value・封装成一个闭包，而闭包函数的内部直接一个 return
     public function offsetSet($key, $value)
     {
         $this->bind($key, $value instanceof Closure ? $value : function () use ($value) {
@@ -1253,6 +1273,8 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $key
      * @return void
      */
+	 
+	 //当外部尝试使用 unset 函数的时候触发此方法，
     public function offsetUnset($key)
     {
         unset($this->bindings[$key], $this->instances[$key], $this->resolved[$key]);

@@ -15,10 +15,6 @@ function echoDebug($data, $exit = 0){
 	}		
 }
 
-/**
- *
- * @package  Laravel
- */
 
 define('LARAVEL_START', microtime(true));
 
@@ -28,7 +24,7 @@ define('LARAVEL_START', microtime(true));
 |--------------------------------------------------------------------------
 |
 | Composer provides a convenient, automatically generated class loader for
-| our application. We just need to utilize it! We'll simply require it
+| our application.  We'll simply require it
 | into the script here so that we don't have to worry about manual
 | loading any of our classes later on. 
 |
@@ -36,7 +32,8 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
-echoDebug(__DIR__);
+//echoDebug(__DIR__); //等价于dirname(__FILE__) 无后面斜杠
+
 
 
 /*
@@ -52,6 +49,8 @@ echoDebug(__DIR__);
 */
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
+
+
 
 /*
 |--------------------------------------------------------------------------

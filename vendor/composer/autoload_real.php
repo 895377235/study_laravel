@@ -21,11 +21,22 @@ class ComposerAutoloaderInit798836f8389437fb3cf634291b4a1b47
 		
 		
 		
-
+		//注册一个自动加载程序，加载程序为本类的 loadClassLoader() 方法，
         spl_autoload_register(array('ComposerAutoloaderInit798836f8389437fb3cf634291b4a1b47', 'loadClassLoader'), true, true);
+		
+		//实例
         self::$loader = $loader = new \Composer\Autoload\ClassLoader();
+		
+		
+		//卸载自动加载程序 loadClassLoader
         spl_autoload_unregister(array('ComposerAutoloaderInit798836f8389437fb3cf634291b4a1b47', 'loadClassLoader'));
 
+		
+		
+		
+		
+		
+		
         $useStaticLoader = PHP_VERSION_ID >= 50600 && !defined('HHVM_VERSION') && (!function_exists('zend_loader_file_encoded') || !zend_loader_file_encoded());
         if ($useStaticLoader) {
             require_once __DIR__ . '/autoload_static.php';
@@ -48,6 +59,8 @@ class ComposerAutoloaderInit798836f8389437fb3cf634291b4a1b47
             }
         }
 
+		
+		
         $loader->register(true);
 
         if ($useStaticLoader) {

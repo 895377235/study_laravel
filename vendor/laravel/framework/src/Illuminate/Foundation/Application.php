@@ -8,7 +8,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+
 use Illuminate\Container\Container;
+
+
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Log\LogServiceProvider;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +25,8 @@ use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 
+
+// 实现 2 个接口 ApplicationContract，  HttpKernelInterface
 class Application extends Container implements ApplicationContract, HttpKernelInterface
 {
     /**
@@ -149,8 +154,10 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         }
 
         $this->registerBaseBindings();
-        $this->registerBaseServiceProviders();
-        $this->registerCoreContainerAliases();
+        $this->registerBaseServiceProviders();//基础服务提供商,Laravel 刚开始注册了 2 个提供商，一个事件，一个是路由。
+		
+		
+        $this->registerCoreContainerAliases();//注册核心容器的别名,最后是存放在 $aliases 这个数组里面
     }
 
     /**
